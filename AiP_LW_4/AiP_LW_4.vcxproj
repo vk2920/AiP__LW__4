@@ -142,11 +142,26 @@
   <ItemGroup>
     <ClCompile Include="AiP_LW_4.cpp" />
     <ClCompile Include="menu.cpp" />
+    <ClCompile Include="tree_create_node.cpp" />
     <ClCompile Include="tree_files.cpp" />
+    <ClCompile Include="tree_find_nodes.cpp" />
+    <ClCompile Include="tree_nodes_edit.cpp" />
+    <ClCompile Include="tree_other.cpp" />
+    <ClCompile Include="tree_prints.cpp" />
+    <ClCompile Include="tree_stag.cpp" />
+    <ClCompile Include="tree_view.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="menu.h" />
+    <ClInclude Include="tree_create_node.h" />
     <ClInclude Include="tree_files.h" />
+    <ClInclude Include="tree_find_nodes.h" />
+    <ClInclude Include="tree_nodes_edit.h" />
+    <ClInclude Include="tree_other.h" />
+    <ClInclude Include="tree_prints.h" />
+    <ClInclude Include="tree_stag.h" />
+    <ClInclude Include="tree_types.h" />
+    <ClInclude Include="tree_view.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -8,6 +8,9 @@
 #include <stdio.h>
 #endif
 
-FILE* open_file(char* fname);
-int save_tree_to_file(worker* _root, FILE* _file);
-worker* read_tree_from_file(FILE* _file);
+#ifndef worker
+#include "tree_types.h"
+#endif
+
+worker* find_left(worker* _root);
+worker* find_node(worker* _root, int _id);

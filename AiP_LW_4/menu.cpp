@@ -76,6 +76,8 @@ int select_from_menu(const char** _menu, const int _mic, int _exit_code) {
     int htab, vtab;
     const char _sep1[] = "+---------------------------------------+---------------------------------------+\n";
     const char _sep2[] = "+-  -       -       -       -       -  -+-  -       -       -       -       -  -+\n";
+    COORD position = { 0, 0 };
+    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
     while (1) {
         size = get_size();
         if (size && !size[0]) htab = (get_size()[1] - 80) / 2;
@@ -83,11 +85,15 @@ int select_from_menu(const char** _menu, const int _mic, int _exit_code) {
         if (size && !size[0]) vtab = (get_size()[2] - _mic - 1) / 2;
         else vtab = 0;
 
+        char* ltab = (char*)malloc(htab);
+        for (int _i = 0; _i < htab; _i++) ltab[_i] = ' ', ltab[_i+1] = '\0';
+
+        char* ttab = (char*)malloc(vtab);
+        for (int _i = 0; _i < vtab; _i++) ttab[_i] = '\n', ttab[_i + 1] = '\0';
+
         // Вывод менюшки
-        system("cls");
-        for (int _j = 0; _j < vtab; _j++) printf("\n");
-        for (int _j = 0; _j < htab; _j++) printf(" ");
-        printf("%s", _sep1);
+        SetConsoleCursorPosition(hConsole, position);
+        printf("%s%s%s", ttab, ltab, _sep1);
         for (int _i = 0; _i < (_mic + 1) / 2; _i++) {
             for (int _j = 0; _j < htab; _j++) printf(" ");
             printf((2 * _i == s) ? "|\x1b[47;30m" : "|");
@@ -97,23 +103,19 @@ int select_from_menu(const char** _menu, const int _mic, int _exit_code) {
                 printf(" %-38s\x1b[0m|\n", _menu[2 * _i + 1]);
             }
             else printf("                                       |\n");
-            if (2 * _i + 1 != _mic) {
-                for (int _j = 0; _j < htab; _j++) printf(" ");
-                printf("%s", _sep2);
-            }
+            if (2 * _i + 2 < _mic) printf("%s%s", ltab, _sep2);
         }
-        for (int _j = 0; _j < htab; _j++) printf(" ");
-        printf("%s", _sep1);
+        printf("%s%s", ltab, _sep1);
 
         // Исключим ложные срабатывания
         int a = _getch();
 
         // 115 121 115 116 101 109
-        if (a == 115 && _getch() == 121 && _getch() == 115 && _getch() == 116 && _getch() == 101 && _getch() == 109) {
+        if (a == 115 && (a = _getch()) == 121 && (a = _getch()) == 115 && (a = _getch()) == 116 && (a = _getch()) == 101 && (a = _getch()) == 109) {
             start_egg();
         }
         // 251 237 251 229 243 252
-        else if (a == 251 && _getch() == 237 && _getch() == 251 && _getch() == 229 && _getch() == 243 && _getch() == 252) {
+        else if (a == 251 && (a = _getch()) == 237 && (a = _getch()) == 251 && (a = _getch()) == 229 && (a = _getch()) == 243 && (a = _getch()) == 252) {
             start_egg();
         }
 
